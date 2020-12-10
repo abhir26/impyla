@@ -1029,6 +1029,9 @@ class ThriftRPC(object):
             except TTransportException:
                 log.exception('Failed to open transport (tries_left=%s)',
                               tries_left)
+            except HttpError as e:
+                log.exception('Failed with err: %s ; (tries_left=%s)',
+                              str(e), tries_left)
             except Exception:
                 raise
             log.debug('Closing transport (tries_left=%s)', tries_left)
